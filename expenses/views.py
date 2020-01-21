@@ -24,7 +24,7 @@ class RegisterView(CreateView):
 
 
 class ExpenseListView(LoginRequiredMixin, PagedFilteredTableView):
-    login_url = '/expenses/login/'
+    login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model = Expense
     paginate_by = 5
@@ -60,7 +60,7 @@ class ExpenseListView(LoginRequiredMixin, PagedFilteredTableView):
 
 
 class ExpenseCreateView(LoginRequiredMixin, CreateView):
-    login_url = '/expenses/login/'
+    login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model = Expense
     name = 'expense-create'
@@ -74,7 +74,7 @@ class ExpenseCreateView(LoginRequiredMixin, CreateView):
 
 
 class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = '/expenses/login/'
+    login_url = '/login/'
     redirect_field_name = 'redirect_to'
     model = Expense
     name = 'expense-update'
@@ -88,7 +88,7 @@ class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class ExpenseDetailView(LoginRequiredMixin, DetailView):
-    login_url = '/expenses/login/'
+    login_url = '/login/'
     model = Expense
     name = 'expense-detail'
     template_name = 'expense_detail.html'
@@ -100,7 +100,7 @@ class ExpenseDetailView(LoginRequiredMixin, DetailView):
 
 
 class ExpenseDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = '/expenses/login/'
+    login_url = '/login/'
     model = Expense
     name = 'expense-delete'
     template_name = 'expense_delete.html'

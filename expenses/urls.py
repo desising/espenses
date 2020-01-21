@@ -2,6 +2,7 @@ from django.urls import path
 from expenses import views
 
 urlpatterns = [
+                  path('', views.ExpenseListView.as_view(), name=views.ExpenseListView.name),
                   path('my/', views.ExpenseListView.as_view(), name=views.ExpenseListView.name),
                   path('create/', views.ExpenseCreateView.as_view(), name=views.ExpenseCreateView.name),
                   path('<int:pk>/', views.ExpenseDetailView.as_view(), name=views.ExpenseDetailView.name),
