@@ -20,12 +20,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', include('django.contrib.auth.urls')),
-    path('login/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path('expenses/', include('django.contrib.auth.urls')),
-    path('expenses/', include('expenses.urls')),
-    #path('expenses/', views.ExpenseListView.as_view(), name=views.ExpenseListView.name),
+    path('', include('expenses.urls')),
 ]
 
 if settings.DEBUG: # new
