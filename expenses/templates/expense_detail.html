@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title_block %}
+ <h1>Expense Details</h1>
+{% endblock %}
+
+{% block body_block %}
+{% if user.is_authenticated %}
+    {% if expense.image.url  != None %}
+    <img src="{{ expense.image.url}}" alt="{{ expense.name }}" style="width:300px;height:300px;">
+    {% endif %}
+     <p>{{ expense.name }}</p>
+     <p>{{ expense.created }}</p>
+     <p>INR {{ expense.amount }}</p>
+<a class="btn btn-small btn-primary dark" href="{% url 'expense-list' %}">Back</a>
+<a class="btn btn-small btn-primary dark" href="{% url 'expense-update' expense.pk %}">Edit Expense</a>
+<a class="btn btn-small btn-primary dark" href="{% url 'expense-delete' expense.pk %}">Delete Expense</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap4  %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+{% block title %}
+     <title>registration page</title>
+{% endblock%}
+{% block heading %}
+    <h1>Register your account to manage expenses</h1>
+{% endblock %}
+{% block body_block %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+<div>
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    {% buttons %}
+    <!--<table>
+        <tr>
+             <td> {{ form.username.label }} </td>
+             <td> {{ form.username }} </td>
+        </tr>
+        <tr>
+              <td>{{ form.password.label }}</td>
+              <td>{{ form.password }}</td>
+       </tr>
+    </table>-->
+    <input class="btn btn-small btn-primary dark" type="submit" value="register"/>
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endbuttons %}
+</form>
+If you already have an account <a href="/expenses/login" target="blank"><strong>login</strong></a> instead.
+</div>
+{% endblock %}
+

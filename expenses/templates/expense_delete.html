@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block heading_block %}
+    <h1>Delete Expense</h1>
+{% endblock %}
+
+{% block body_block %}
+    <form action="" method="post"> {% csrf_token %}
+    <p>Are you sure you want to delete "{{ expense.name }}"?</p>
+    <input type="Submit" value="Confirm">
+    </form>
+
+{% endblock body_block %}

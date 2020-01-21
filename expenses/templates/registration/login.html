@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap4  %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% block title %}
+     <title>login page</title>
+{% endblock%}
+{% block heading %}
+    <h1>Login to Accesss your accounts</h1>
+{% endblock %}
+{% block body_block %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+<div>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    {% buttons %}
+    <!--<table>
+        <tr>
+             <td> {{ form.username.label }} </td>
+             <td> {{ form.username }} </td>
+        </tr>
+        <tr>
+              <td>{{ form.password.label }}</td>
+              <td>{{ form.password }}</td>
+       </tr>
+    </table>-->
+    <input class="btn btn-small btn-primary dark" type="submit" value="login"/>
+    <input type="hidden" name="next" value="{{ next }}">
+    <a href="{% url "register" %}" class="btn btn-small btn-primary dark"><span class="hidden-phone"><i class="fa fa-user-plus"></i>register</span></a>
+    {% endbuttons %}
+</form>
+</div>
+{% endblock %}
