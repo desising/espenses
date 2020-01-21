@@ -24,7 +24,7 @@ class RegisterView(CreateView):
 
 
 class ExpenseListView(LoginRequiredMixin, PagedFilteredTableView):
-    login_url = 'expense/login/'
+    login_url = '/expenses/login/'
     redirect_field_name = 'redirect_to'
     model = Expense
     paginate_by = 5

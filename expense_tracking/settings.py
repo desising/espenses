@@ -20,10 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm^9*5osy$x29$(quebtic7cf$^qk8-)%k8l#9mo2+@cn(@d*-('
+#SECRET_KEY = 'm^9*5osy$x29$(quebtic7cf$^qk8-)%k8l#9mo2+@cn(@d*-('
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'm^9*5osy$x29$(quebtic7cf$^qk8-)%k8l#9mo2+@cn(@d*-(')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = []
 
@@ -162,9 +164,17 @@ WSGI_APPLICATION = 'expense_tracking.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'expense_tracking',
+        'USER': 'expense_tracking_user',
+        'PASSWORD': 'pqreestabcf#123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
 }
 
 
@@ -206,7 +216,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/expenses/my'
-LOGOUT_REDIRECT_URL = '/expenses/login'
+LOGOUT_REDIRECT_URL = '/login'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
