@@ -1,44 +1,22 @@
-#from django_tables2 import SingleTableView
-#from django_tables2.config import RequestConfig
-
-
-#class PagedFilteredTableView(SingleTableView):
-#    filter_class = None
-#    formhelper_class = None
-#    context_filter_name = 'filter'
-
-#    def get_queryset(self, **kwargs):
-#        print("hello8")
-#        qs = super(PagedFilteredTableView, self).get_queryset()
-#        print("hello9")
-#        self.filter = self.filter_class(self.request.GET, queryset=qs)
-#        print("hello10")
-#        self.filter.form.helper = self.formhelper_class()
-#        print("hello11")
-#        return self.filter.qs
-
-#    def get_context_data(self, **kwargs): 
-#        print("hello6")
-#        context = super(PagedFilteredTableView, self).get_context_data()
-#        print("hello7")
-#        context[self.context_filter_name] = self.filter
-#        return context
-
 from django_tables2 import SingleTableView
 from django_tables2.config import RequestConfig
 
-class PagedFilteredTableView(SingleTableView):
+class FilteredTableView(SingleTableView):
+    """
+      This class is used as a helper class to incorporate 
+      the filtered objects into a single template
+    """
     filter_class = None
     formhelper_class = None
     context_filter_name = 'filter'
 
     def get_queryset(self, **kwargs):
-        qs = super(PagedFilteredTableView, self).get_queryset()
+        qs = super(FilteredTableView, self).get_queryset()
         self.filter = self.filter_class(self.request.GET, queryset=qs)
         self.filter.form.helper = self.formhelper_class()
         return self.filter.qs
 
     def get_context_data(self, **kwargs):
-        context = super(PagedFilteredTableView, self).get_context_data()
+        context = super(FilteredTableView, self).get_context_data()
         context[self.context_filter_name] = self.filter
         return context

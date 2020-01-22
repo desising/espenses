@@ -7,7 +7,10 @@ from django_filters import DateTimeFilter
 
 
 def filter_not_empty(queryset, name, value):
-    #lookup = '__'.join([name, exact])
+    """
+     Custom Filter to check if the Image Field in 
+     Expense Object is empty or not
+    """
     if value is False:
         return queryset.filter(image__exact="")
     else:
@@ -15,30 +18,28 @@ def filter_not_empty(queryset, name, value):
 
 
 class ExpenseListFilter(FilterSet):
+    
+    #this filter is used to filter any substring in the name of the expense
     name__cont = CharFilter(field_name='name', lookup_expr='icontains')
+    
+    #this filter is used to filter expenses which are greater than equal to the given amount
     amount__gt = NumberFilter(field_name='amount', lookup_expr='gte')
-    amount__lt = NumberFilter(field_name='amount', lookup_expr='lte')
+
+    #this filter is used to filter expenses which are greater than equal to the given amount
+    amount__lt = NumberFilter(field_name='amount', lookup_expr='lt')
+ 
+    #this filter is used to filter expenses which have been created after the given date
     created__gt = DateTimeFilter(field_name='created', lookup_expr='gte')
+
+    #this filter is used to filter expenses which have been created before the given date
     created__lt = DateTimeFilter(field_name='created', lookup_expr='lt')
+
+    #this filter is used to filter expenses based on image attached or not
     image__exists = BooleanFilter(field_name='image', method=filter_not_empty) 
 
     class Meta:
         model = Expense
-        #exclude = ['image']
         fields = ('name', 'amount','created', 'image__exists')
-        #fields = {
-        #    'name': ['exact'],
-        #    'amount':['exact','lte', 'gte'],
-        #    'created' : ['exact', 'year__gt'],
-        #}
         order_by = ['pk']
-        #filter_overrides = {
-        #     models.ImageField: {
-        #         'filter_class': django_filters.BooleanFilter,
-        #         'extra': lambda f: {
-        #             'widget': forms.CheckboxInput,
-        #         },
-        #     },
-        # }
 
 

@@ -3,6 +3,10 @@ from django_tables2.utils import A
 from .models import Expense
 
 class ExpenseTable(tables.Table):
+    """
+       This class is used to provide link for expense 
+       entries in the given table
+    """
     name = tables.LinkColumn('expense-detail', args=[A('pk')])
     amount = tables.LinkColumn('expense-detail', args=[A('pk')])
     created = tables.LinkColumn('expense-detail', args=[A('pk')])

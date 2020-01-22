@@ -36,4 +36,8 @@ A step by step series of examples that tell you how to get a development env run
 12.open your browser and access http://localhost:8000/login
 ```
 
+###To Run Unit Tests 
+
+python manage.py test expenses/tests/
+
 

@@ -4,7 +4,11 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout,Fieldset, ButtonHolder, Submit
 from crispy_forms.bootstrap import InlineField, FormActions, StrictButton, InlineCheckboxes
 
-class ExpenseListFormHelper(FormHelper):    
+class ExpenseListFormHelper(FormHelper):
+    """
+       This Class renders the filter form used for filtering the expenses
+    """    
+
     model = Expense
     form_id = 'expense-search-form'
     form_class = 'form-inline'
@@ -26,7 +30,6 @@ class ExpenseListFormHelper(FormHelper):
                     InlineField('created__gt'),
                     InlineField('created__lt'),
                     InlineField('image__exists'),
-                    #InlineCheckboxes('image__exists'),
                 ),
                 FormActions(
                     StrictButton(
@@ -39,6 +42,7 @@ class ExpenseListFormHelper(FormHelper):
 
 
 class ExpenseCreateForm(forms.ModelForm):
+    "This class renders the form which is used to create an expense"
     class Meta:
         model = Expense
         exclude = ('user', 'created')
