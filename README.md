@@ -1,4 +1,4 @@
-##Manage Your Expenses
+Manage Your Expenses
 
 A django Application to manage your expenses.
 
