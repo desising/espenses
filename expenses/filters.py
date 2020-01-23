@@ -1,5 +1,5 @@
 
-from django_filters import NumberFilter, CharFilter, DateTimeFilter, BooleanFilter, FilterSet
+from django_filters import NumberFilter, CharFilter, DateTimeFilter, BooleanFilter, FilterSet, ChoiceFilter
 from expenses.models import Expense
 from django.db  import models
 from django import forms
@@ -11,14 +11,20 @@ def filter_not_empty(queryset, name, value):
      Custom Filter to check if the Image Field in 
      Expense Object is empty or not
     """
-    if value is False:
+    if value == 'false':
         return queryset.filter(image__exact="")
     else:
         return queryset.filter(image__regex="^(?!\s*$).+")
 
 
+
+ADDRESSED_CHOICES = (
+    ('true','Image Attached'),
+    ('false','Image Not Attached'),
+)
+
 class ExpenseListFilter(FilterSet):
-    
+ 
     #this filter is used to filter any substring in the name of the expense
     name__cont = CharFilter(field_name='name', lookup_expr='icontains')
     
@@ -35,7 +41,8 @@ class ExpenseListFilter(FilterSet):
     created__lt = DateTimeFilter(field_name='created', lookup_expr='lt')
 
     #this filter is used to filter expenses based on image attached or not
-    image__exists = BooleanFilter(field_name='image', method=filter_not_empty) 
+    image__exists = ChoiceFilter(method=filter_not_empty, choices=ADDRESSED_CHOICES, label='Status', field_name='image')
+
 
     class Meta:
         model = Expense
